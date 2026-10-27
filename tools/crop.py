@@ -7,7 +7,7 @@ SRC, OUT, OG = ROOT / "src", ROOT / "site" / "assets", ROOT / "build" / "og-src"
 
 # доли от размера исходника: (left, top, right, bottom); исходники разного разрешения
 CARDS = {
-    "neon": ("neon-jungle.jpg", (0.173, 0.322, 0.92, 0.905)),
+    "neon": ("neon-jungle.jpg", (0.173, 0.322, 0.92, 0.893)),
     "game": ("game-light.jpg", (0.173, 0.29, 0.84, 0.80)),
     "aqua": ("aqua.jpg", (0.16, 0.328, 0.96, 0.905)),
     "berry": ("berry.jpg", (0.16, 0.328, 0.96, 0.905)),
@@ -15,7 +15,7 @@ CARDS = {
 }
 # квадраты под обложки 1080×1080: вырезаем без надписей, которые зашиты в фото
 SQUARES = {
-    "neon": ("neon-jungle.jpg", (0.104, 0.33, 0.895, 0.905)),
+    "neon": ("neon-jungle.jpg", (0.104, 0.33, 0.895, 0.893)),
     "kaspi": ("game-light.jpg", (0.153, 0.28, 0.847, 0.80)),
     "berry": ("berry.jpg", (0.133, 0.33, 0.9, 0.905)),
     "aqua": ("aqua.jpg", (0.133, 0.33, 0.9, 0.905)),
