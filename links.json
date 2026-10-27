@@ -1,0 +1,69 @@
+{
+  "base": "https://stasikproger.github.io/drjoys-links",
+  "links": [
+    {
+      "slug": "neon",
+      "ig_title": "Неоновый лубрикант",
+      "store": "Wildberries",
+      "og_title": "Неоновый лубрикант DR.JOYS",
+      "og_desc": "Светится в темноте. pH 4.2, 100 мл, на водной основе.",
+      "target": "https://wildberries.kz/catalog/0/search.aspx?search=WW833513"
+    },
+    {
+      "slug": "kaspi",
+      "ig_title": "Игра для пар на Kaspi",
+      "store": "Kaspi.kz",
+      "og_title": "Карточная игра «Обо всём открыто»",
+      "og_desc": "52 вопроса, чтобы узнать друг друга ближе.",
+      "target": "https://drjoyskaspikz.mobz.site/drjoysoriginal"
+    },
+    {
+      "slug": "berry",
+      "ig_title": "Лубрикант со вкусом 🍓",
+      "store": "Wildberries",
+      "og_title": "Съедобный лубрикант DR.JOYS со вкусом клубники",
+      "og_desc": "На водной основе, 200 мл.",
+      "target": "https://wildberries.kz/catalog/0/search.aspx?search=WW603786"
+    },
+    {
+      "slug": "aqua",
+      "ig_title": "Лубрикант на водной основе",
+      "store": "Wildberries",
+      "og_title": "Лубрикант DR.JOYS на водной основе",
+      "og_desc": "Классический, 200 мл.",
+      "target": "https://wildberries.kz/catalog/0/search.aspx?search=WW603766"
+    },
+    {
+      "slug": "flip",
+      "ig_title": "Мы на Flip.kz",
+      "store": "Flip.kz",
+      "og_title": "DR.JOYS на Flip.kz",
+      "og_desc": "Презервативы, лубриканты и игры для пар с доставкой по Казахстану.",
+      "target": "https://www.flip.kz/search?search=dr.joys"
+    },
+    {
+      "slug": "game",
+      "ig_title": "Игра Fappy Sperm",
+      "store": "Fappy Sperm",
+      "og_title": "Fappy Sperm by DR.JOYS",
+      "og_desc": "Один клик — один рывок. Набери рекорд и забери приз.",
+      "target": "https://drjoys.promo"
+    },
+    {
+      "slug": "site",
+      "ig_title": "Сайт DR.JOYS",
+      "store": "dr-joys.com",
+      "og_title": "DR.JOYS — ультратонкие презервативы",
+      "og_desc": "Неощутимые на 95%.",
+      "target": "https://dr-joys.com"
+    },
+    {
+      "slug": "order",
+      "ig_title": "Заказать анонимно",
+      "store": "WhatsApp",
+      "og_title": "Заказать DR.JOYS анонимно",
+      "og_desc": "Пишите в WhatsApp — упакуем так, что никто не узнает, что внутри.",
+      "target": "https://wa.me/77766103836?text=Салем! Пишу из инстаграма. Хочу заказать "
+    }
+  ]
+}

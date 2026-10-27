@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- Обложки ссылок 1080×1080 для превью в Instagram. Рендер: tools/build.py открывает og.html?v=<slug> -->
+<style>
+@font-face{font-family:Benzin;src:url(../site/assets/benzin.woff2) format("woff2");font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden}
+section{display:none;position:relative;width:1080px;height:1080px;overflow:hidden}
+section.on{display:block}
+.pattern{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 140 140'%3E%3Cg fill='%23fff' fill-opacity='.07'%3E%3Cpath transform='translate(14 16) rotate(-14 22 22)' d='M2 5 22 1l20 4c2 20-6 34-20 41C8 39 0 25 2 5Zm20 30c6-4 12-7 12-14 0-4-3-7-6-7-3 0-5 2-6 5-1-3-3-5-6-5-3 0-6 3-6 7 0 6 6 10 12 14Z' fill-rule='evenodd'/%3E%3Cpath transform='translate(84 80) rotate(12 22 22)' d='M2 5 22 1l20 4c2 20-6 34-20 41C8 39 0 25 2 5Zm20 30c6-4 12-7 12-14 0-4-3-7-6-7-3 0-5 2-6 5-1-3-3-5-6-5-3 0-6 3-6 7 0 6 6 10 12 14Z' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E")}
+.tag{position:absolute;font:700 92px/1 Benzin;text-transform:uppercase;padding:22px 30px 16px;white-space:nowrap;z-index:3}
+.red{background:#e42521;color:#fff}
+.white{background:#fff;color:#000}
+.black{background:#000;color:#fff}
+.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:auto 0 0 0;height:420px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55))}
+.mark{position:absolute;top:56px;left:60px;width:300px;z-index:3}
+
+/* хаб: логотип на красном */
+#v-hub{background-color:#e42521}
+#v-hub .logo{position:absolute;left:90px;top:380px;width:900px}
+#v-hub .tag{left:150px;top:640px;transform:rotate(-3deg);font-size:84px}
+
+/* неон */
+#v-neon{background:#050805}
+#v-neon .glow{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 55%,rgba(141,255,63,.18),transparent 70%)}
+#v-neon .tag{left:56px;bottom:70px;transform:rotate(-3deg)}
+
+/* игра для пар на Kaspi */
+#v-kaspi{background:#eaeceb}
+#v-kaspi .tag{left:56px;bottom:70px;transform:rotate(-3deg)}
+
+#v-berry .tag,#v-aqua .tag{left:56px;bottom:70px;transform:rotate(-3deg)}
+
+/* Flip: коробка на белом */
+#v-flip{background:#fff}
+#v-flip .box{position:absolute;height:860px;left:310px;top:40px;transform:rotate(6deg)}
+#v-flip .tag{left:56px;bottom:84px;transform:rotate(-3deg)}
+
+/* Fappy Sperm */
+#v-game{background:radial-gradient(90% 90% at 100% 0%,#a3173f,transparent 65%),linear-gradient(160deg,#3b0a1d,#16060d)}
+#v-game h1{position:absolute;left:70px;top:330px;font:700 190px/.9 Benzin;color:#fff;text-transform:uppercase;z-index:2}
+#v-game .tag{left:70px;top:190px;transform:rotate(-3deg);font-size:78px}
+#v-game .sp{position:absolute;width:420px}
+#v-game .sp1{right:-40px;top:70px;opacity:.95}
+#v-game .sp2{right:120px;top:780px;width:300px;opacity:.6;transform:rotate(-12deg)}
+
+/* сайт */
+#v-site{background-color:#fff}
+#v-site .logo{position:absolute;left:90px;top:400px;width:900px}
+#v-site .tag{left:150px;top:640px;transform:rotate(-3deg);font-size:72px}
+
+/* заказ в WhatsApp */
+#v-order{background-color:#e42521}
+#v-order .bubble{position:absolute;left:50%;top:150px;width:560px;transform:translateX(-50%)}
+#v-order .tag{left:120px;bottom:120px;transform:rotate(-3deg);font-size:84px}
+</style>
+</head>
+<body>
+<section id="v-hub" class="pattern">
+  <img class="logo" src="../site/assets/logo-onred.svg">
+  <span class="tag white">все ссылки</span>
+</section>
+
+<section id="v-neon">
+  <img class="photo" src="../build/og-src/neon.jpg">
+  <div class="glow"></div>
+  <span class="tag red">неон</span>
+</section>
+
+<section id="v-kaspi">
+  <img class="photo" src="../build/og-src/kaspi.jpg">
+  <span class="tag red">для пар</span>
+</section>
+
+<section id="v-berry">
+  <img class="photo" src="../build/og-src/berry.jpg">
+  <div class="shade"></div>
+  <span class="tag white">клубника</span>
+</section>
+
+<section id="v-aqua">
+  <img class="photo" src="../build/og-src/aqua.jpg">
+  <div class="shade"></div>
+  <span class="tag white">классика</span>
+</section>
+
+<section id="v-flip">
+  <img class="box" src="../src/condoms-17.jpg">
+  <span class="tag black">flip.kz</span>
+</section>
+
+<section id="v-game">
+  <span class="tag red">игра</span>
+  <h1>Fappy<br>Sperm</h1>
+  <svg class="sp sp1" viewBox="0 0 64 20"><ellipse cx="9" cy="10" rx="9" ry="7" fill="#fff"/><path d="M17 10c8-6 12 6 20 0s12 6 20 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+  <svg class="sp sp2" viewBox="0 0 64 20"><ellipse cx="9" cy="10" rx="9" ry="7" fill="#fff"/><path d="M17 10c8-6 12 6 20 0s12 6 20 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+</section>
+
+<section id="v-site">
+  <img class="logo" src="../site/assets/logo.svg">
+  <span class="tag red">dr-joys.com</span>
+</section>
+
+<section id="v-order" class="pattern">
+  <svg class="bubble" viewBox="0 0 24 24"><path d="M12 2.5c5.5 0 9.5 3.9 9.5 8.8s-4 8.8-9.5 8.8c-1.3 0-2.5-.2-3.6-.6L3.5 21l1.3-4.2C3.4 15.3 2.5 13.4 2.5 11.3 2.5 6.4 6.5 2.5 12 2.5Z" fill="#fff"/><path d="M12 15.6c2.2-1.5 4-3 4-5 0-1.3-1-2.3-2.1-2.3-.9 0-1.6.6-1.9 1.4-.3-.8-1-1.4-1.9-1.4C9 8.3 8 9.3 8 10.6c0 2 1.8 3.5 4 5Z" fill="#e42521"/></svg>
+  <span class="tag white">заказать</span>
+</section>
+<script>
+  const v = new URLSearchParams(location.search).get("v") || "hub";
+  document.getElementById("v-" + v).classList.add("on");
+</script>
+</body>
+</html>
