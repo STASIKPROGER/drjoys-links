@@ -185,6 +185,38 @@ a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 @keyframes flicker{0%,17%,19.5%,22%,100%{opacity:1}18%,21%{opacity:.45}}
 .neon .chip{animation:neon 2.6s ease-in-out infinite}
 @keyframes neon{50%{text-shadow:0 0 12px rgba(141,255,63,.9)}}
+
+/* сердечки плывут вверх по фону */
+.float{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float i{position:absolute;bottom:-70px;left:var(--x);width:var(--s);height:var(--s);opacity:var(--o);
+  background:url(assets/heart.svg) center/contain no-repeat;animation:rise var(--d) linear var(--dl) infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0)}50%{transform:translate(18px,-55vh) rotate(var(--rot))}100%{transform:translate(-6px,calc(-100vh - 140px)) rotate(0)}}
+.wrap{position:relative;z-index:1}
+/* точки маркетплейсов пульсируют */
+.mp .dot{animation:ping 2s ease-out infinite}
+.mp a:nth-child(2) .dot{animation-delay:.35s}
+.mp a:nth-child(3) .dot{animation-delay:.7s}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(228,37,33,.75)}80%,100%{box-shadow:0 0 0 9px rgba(228,37,33,0)}}
+/* игра: карточки разлетаются веером */
+.fan{position:absolute;right:40px;top:22px;width:46px;height:60px;z-index:2}
+.fan i{position:absolute;inset:0;border-radius:6px;background:#f4eee4 url(assets/heart.svg) center 44%/56% no-repeat;
+  box-shadow:0 4px 10px rgba(0,0,0,.18),inset 0 0 0 2px #fff;transform-origin:50% 120%;animation:fan 3.2s ease-in-out infinite}
+.fan i:nth-child(1){--a:-24deg}
+.fan i:nth-child(2){--a:0deg;animation-delay:.05s}
+.fan i:nth-child(3){--a:24deg;animation-delay:.1s}
+@keyframes fan{0%,15%,85%,100%{transform:rotate(0)}40%,65%{transform:rotate(var(--a)) translateY(-4px)}}
+/* презервативы: коробка покачивается */
+.condoms .pic{transform-origin:50% 90%;animation:sway 3.6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-6px)}}
+/* лубриканты: капает капля */
+.ph{position:relative}
+.drip{position:absolute;left:auto;right:9px;bottom:-6px;width:12px;height:15px;z-index:2;
+  border-radius:50% 50% 50% 50%/62% 62% 40% 40%;transform-origin:50% 0;animation:drip 2.6s ease-in infinite}
+.drip::after{content:"";position:absolute;left:3px;top:4px;width:3px;height:5px;border-radius:50%;background:rgba(255,255,255,.85)}
+.berry .drip{background:radial-gradient(circle at 40% 35%,#ffc2d4,#ff5f8f 70%)}
+.aqua .drip{background:radial-gradient(circle at 40% 35%,#fff,#cfe3ff 75%)}
+@keyframes drip{0%{transform:translateY(-6px) scale(.2,.1);opacity:0}25%{transform:translateY(0) scale(.7,.6);opacity:1}
+  45%{transform:translateY(2px) scale(.9,1.15)}75%{transform:translateY(34px) scale(.8,1.05);opacity:1}100%{transform:translateY(52px) scale(.6);opacity:0}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -192,6 +224,16 @@ a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="arr" viewBox="0 0 14 14"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
+<div class="float" aria-hidden="true">
+  <i style="--x:6%;--s:22px;--o:.22;--d:19s;--dl:-2s;--rot:25deg"></i>
+  <i style="--x:22%;--s:14px;--o:.16;--d:15s;--dl:-9s;--rot:-30deg"></i>
+  <i style="--x:38%;--s:28px;--o:.12;--d:23s;--dl:-14s;--rot:18deg"></i>
+  <i style="--x:55%;--s:16px;--o:.2;--d:17s;--dl:-5s;--rot:-22deg"></i>
+  <i style="--x:70%;--s:24px;--o:.15;--d:21s;--dl:-17s;--rot:30deg"></i>
+  <i style="--x:84%;--s:13px;--o:.22;--d:14s;--dl:-1s;--rot:-18deg"></i>
+  <i style="--x:93%;--s:20px;--o:.14;--d:25s;--dl:-11s;--rot:24deg"></i>
+  <i style="--x:48%;--s:11px;--o:.25;--d:13s;--dl:-7s;--rot:-26deg"></i>
+</div>
 <main class="wrap">
 
   <header class="hero">
@@ -231,6 +273,7 @@ a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 
   <article class="card game">
     <img class="pic" src="assets/game.jpg" alt="Карточная игра «Обо всём открыто»" width="706" height="720" loading="lazy">
+    <span class="fan" aria-hidden="true"><i></i><i></i><i></i></span>
     <div class="body">
       <span class="tag red badge tilt-l">52 вопроса</span>
       <h3>Обо всём открыто</h3>
@@ -257,7 +300,7 @@ a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 
   <div class="duo">
     <article class="mini berry">
-      <img src="assets/berry.jpg" alt="Съедобный лубрикант со вкусом клубники" width="600" height="577" loading="lazy">
+      <div class="ph"><img src="assets/berry.jpg" alt="Съедобный лубрикант со вкусом клубники" width="600" height="577" loading="lazy"><span class="drip" aria-hidden="true"></span></div>
       <div class="in">
         <h3>Клубничный лубрикант</h3>
         <p>Съедобный · 200&nbsp;мл</p>
@@ -267,8 +310,8 @@ a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
         </div>
       </div>
     </article>
-    <article class="mini">
-      <img src="assets/aqua.jpg" alt="Лубрикант на водной основе" width="600" height="577" loading="lazy">
+    <article class="mini aqua">
+      <div class="ph"><img src="assets/aqua.jpg" alt="Лубрикант на водной основе" width="600" height="577" loading="lazy"><span class="drip" aria-hidden="true"></span></div>
       <div class="in">
         <h3>На водной основе</h3>
         <p>Классический · 200&nbsp;мл</p>
