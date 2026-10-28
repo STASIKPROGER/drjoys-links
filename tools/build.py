@@ -70,7 +70,9 @@ def build_pages():
         shutil.rmtree(DOCS)
     shutil.copytree(SITE, DOCS)
     index = DOCS / "index.html"
-    index.write_text(index.read_text().replace("{{BASE}}", BASE))
+    logo = (SITE / "assets" / "logo-inline.svg").read_text()
+    index.write_text(index.read_text().replace("{{BASE}}", BASE).replace("<!--LOGO-->", logo))
+    (DOCS / "assets" / "logo-inline.svg").unlink()
     for link in CFG["links"]:
         target = encode_target(link["target"])
         page = REDIRECT.format(

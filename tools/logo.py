@@ -1,8 +1,11 @@
 """Логотип DR.JOYS «в две строки» из PNG со страницы игры (src/logo-stack.png, 640×482).
 
 Буквы берём из PNG, щит и сердце рисуем вектором из site/assets/logo.svg поверх —
-так сердце можно анимировать отдельно. На выходе самодостаточные SVG (PNG внутри base64):
-  site/assets/logo-stack.svg        белые буквы, красный щит, бьющееся белое сердце (для тёмного фона)
+так сердце можно анимировать отдельно (SMIL: работает и в <img>, и во встроенном SVG на iPhone).
+На выходе:
+  site/assets/logo-letters.png      белые буквы без щита
+  site/assets/logo-inline.svg       разметка для вставки в страницу (build.py подставляет вместо <!--LOGO-->)
+  site/assets/logo-stack.svg        то же самостоятельным файлом (PNG внутри base64) для <img>
   build/og-src/logo-stack-onred.svg белые буквы, белый щит, красное сердце (обложки на красном)
   build/og-src/logo-stack-dark.svg  тёмные буквы, красный щит, белое сердце (обложки на белом)
 """
@@ -60,28 +63,38 @@ def b64(im):
     return base64.b64encode(buf.getvalue()).decode()
 
 
-def compose(letters, shield_fill, heart_fill, beat):
-    style = ""
-    heart_attr = ""
-    if beat:
-        heart_attr = ' class="beat"'
-        style = (
-            "<style>.beat{transform-box:fill-box;transform-origin:50% 55%;animation:beat 1.4s ease-in-out infinite}"
-            "@keyframes beat{0%,50%,100%{transform:scale(1)}12%{transform:scale(1.16)}24%{transform:scale(1)}36%{transform:scale(1.09)}}"
-            "@media (prefers-reduced-motion:reduce){.beat{animation:none}}</style>"
-        )
+# центр сердца в координатах logo.svg (bbox 728.3, 56.8, 211.8×186.3), чуть ниже середины
+HX, HY = 834.2, 159.3
+# «тук-тук»: два удара и пауза
+BEAT = ('<animateTransform attributeName="transform" type="scale" dur="1.4s" repeatCount="indefinite" '
+        'values="1;1.16;1;1.09;1;1" keyTimes="0;.12;.24;.36;.5;1"/>')
+
+
+def heart(fill, beat):
+    path = f'<path d="{heart_d}" fill="{fill}"/>'
+    if not beat:
+        return path
+    return f'<g transform="translate({HX} {HY})"><g>{BEAT}<g transform="translate({-HX} {-HY})">{path}</g></g></g>'
+
+
+def compose(letters_href, shield_fill, heart_fill, beat, attrs=""):
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">{style}'
-        f'<image href="data:image/png;base64,{b64(letters)}" width="{W}" height="{H}"/>'
-        f'<g transform="{PLACE}"><path d="{shield_d}" fill="{shield_fill}"/>'
-        f'<path{heart_attr} d="{heart_d}" fill="{heart_fill}"/></g></svg>'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}"{attrs}>'
+        f'<image href="{letters_href}" width="{W}" height="{H}"/>'
+        f'<g transform="{PLACE}"><path d="{shield_d}" fill="{shield_fill}"/>{heart(heart_fill, beat)}</g></svg>'
     )
 
 
 if __name__ == "__main__":
     OG.mkdir(parents=True, exist_ok=True)
     white = letters_png()
-    (ASSETS / "logo-stack.svg").write_text(compose(white, "#E42521", "#FFFFFF", beat=True))
-    (OG / "logo-stack-onred.svg").write_text(compose(white, "#FFFFFF", "#E42521", beat=False))
-    (OG / "logo-stack-dark.svg").write_text(compose(tint(white, (0x1D, 0x1D, 0x1B)), "#E42521", "#FFFFFF", beat=False))
+    white.save(ASSETS / "logo-letters.png", optimize=True)
+    data = "data:image/png;base64," + b64(white)
+    (ASSETS / "logo-inline.svg").write_text(compose(
+        "assets/logo-letters.png", "#E42521", "#FFFFFF", beat=True,
+        attrs=' class="logo" role="img" aria-label="DR.JOYS" width="150" height="113"'))
+    (ASSETS / "logo-stack.svg").write_text(compose(data, "#E42521", "#FFFFFF", beat=True))
+    (OG / "logo-stack-onred.svg").write_text(compose(data, "#FFFFFF", "#E42521", beat=False))
+    dark = "data:image/png;base64," + b64(tint(white, (0x1D, 0x1D, 0x1B)))
+    (OG / "logo-stack-dark.svg").write_text(compose(dark, "#E42521", "#FFFFFF", beat=False))
     print("ok", (ASSETS / "logo-stack.svg").stat().st_size // 1024, "KB")

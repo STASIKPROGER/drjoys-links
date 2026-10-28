@@ -18,7 +18,8 @@ JS = """() => {
     if (el.closest('.swim')) continue;
     const r = el.getBoundingClientRect();
     if (r.right > vw + 0.5 || r.left < -0.5) out.push('OUT ' + el.textContent.trim().slice(0, 30));
-    if (el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).display !== 'inline')
+    const cs = getComputedStyle(el);
+    if (el.scrollWidth > el.clientWidth + 1 && cs.display !== 'inline' && cs.overflowX === 'visible')
       out.push('CLIP ' + el.textContent.trim().slice(0, 30) + ' ' + el.scrollWidth + '>' + el.clientWidth);
   }
   return {sw: document.documentElement.scrollWidth, out};
@@ -30,7 +31,12 @@ with sync_playwright() as p:
     for w in (360, 390, 430):
         page = browser.new_page(viewport={"width": w, "height": 844}, device_scale_factor=2)
         page.goto(URL, wait_until="load")
-        page.wait_for_timeout(600)
+        # пролистываем, чтобы наклейки и карточки отыграли появление
+        for y in range(0, 6000, 400):
+            page.evaluate(f"scrollTo(0,{y})")
+            page.wait_for_timeout(120)
+        page.evaluate("scrollTo(0,0)")
+        page.wait_for_timeout(900)
         r = page.evaluate(JS)
         print(w, "scrollWidth", r["sw"], "проблем:", len(r["out"]))
         for o in r["out"][:10]:
